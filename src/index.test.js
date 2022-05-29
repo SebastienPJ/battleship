@@ -1,5 +1,12 @@
 import {
+  shipFactory,
 } from './index';
+
+test('Ship Factory returns objects', () => {
+  expect(shipFactory()).toEqual(
+    expect.objectContaining({ length: 3 }),
+  );
+});
 
 // /** *** Capitalize Tests **** */
 // test('Capitalze 1st Character', () => {
