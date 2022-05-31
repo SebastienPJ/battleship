@@ -2,10 +2,9 @@ import {
   shipFactory,
 } from './index';
 
-test('Ship Factory returns objects', () => {
-  expect(shipFactory()).toEqual(
-    expect.objectContaining({ length: 3 }),
-  );
+test('Has ship sunk', () => {
+  const ship = shipFactory(3);
+  expect(ship.isSunk());
 });
 
 // /** *** Capitalize Tests **** */
