@@ -4,7 +4,10 @@ import {
 
 test('Has ship sunk', () => {
   const ship = shipFactory(3);
-  expect(ship.isSunk());
+  ship.isHit();
+  ship.isHit();
+  ship.isHit();
+  expect(ship.isSunk()).toBe(true);
 });
 
 // /** *** Capitalize Tests **** */
