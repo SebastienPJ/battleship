@@ -1,5 +1,15 @@
+/* eslint-disable no-underscore-dangle */
 function shipFactory(length) {
   let hitCount = 0;
+  let _shipCoordinates;
+
+  function setCoordinates(...theArgs) {
+    _shipCoordinates = [...theArgs];
+  }
+
+  function getCoordinates() {
+    return _shipCoordinates;
+  }
 
   function isSunk() {
     return hitCount === length;
@@ -9,7 +19,9 @@ function shipFactory(length) {
     hitCount += 1;
   }
 
-  return { isHit, isSunk };
+  return {
+    isHit, isSunk, setCoordinates, getCoordinates,
+  };
 }
 
 export { shipFactory };
