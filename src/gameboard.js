@@ -1,12 +1,14 @@
 function gameboardFactory() {
-  // place ships at specific coordinates by calling shipFatory
+  function setShip(ship, coordinates) {
+    ship.setCoordinates(coordinates);
+  }
 
   function receiveAttack(coordinate) {
     const row = coordinate[0];
     const col = coordinate[1];
   }
 
-  return { receiveAttack };
+  return { receiveAttack, setShip };
 }
 
 export { gameboardFactory };

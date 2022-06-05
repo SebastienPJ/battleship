@@ -1,6 +1,4 @@
-import {
-  shipFactory,
-} from './index';
+import { shipFactory } from './ship';
 
 test('Ship sinks after hit equal to length', () => {
   const ship = shipFactory(3);
