@@ -37,3 +37,17 @@ test('Does not call ship if not hit', () => {
   gameBoard.receiveAttack(JSON.stringify([0, 3]), allShipsArray);
   expect(ship2.isHit).not.toHaveBeenCalled();
 });
+
+test('Records missed attacks', () => {
+  const missedAttacks = [];
+
+  const ship = {
+    getCoordinates: () => JSON.stringify([[1, 0], [1, 1]]),
+    isHit: jest.fn(),
+  };
+
+  const allShipsArray = [ship];
+  const gameBoard = gameboardFactory();
+  gameBoard.receiveAttack(JSON.stringify([0, 3]), allShipsArray);
+  expect();
+});
