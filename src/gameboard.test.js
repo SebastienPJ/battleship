@@ -61,3 +61,17 @@ test('Records missed attacks', () => {
   gameBoard.receiveAttack([0, 3], allShipsArray);
   expect(gameBoard.getMissedAttacks()).toEqual(expect.arrayContaining([[0, 3]]));
 });
+
+test('Gameboard tracks if all ships have sunk', () => {
+  const ship1 = {
+    isSunk: () => true,
+  };
+
+  const ship2 = {
+    isSunk: () => true,
+  };
+
+  const allShipsArray = [ship1, ship2];
+  const gameBoard = gameboardFactory();
+  expect(gameBoard.haveHallShipsShunk(allShipsArray)).toEqual(true);
+});

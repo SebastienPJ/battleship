@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 function gameboardFactory() {
   const _missedAttacks = [];
+  // const _allShipsHaveSunk = false;
 
   function getMissedAttacks() {
     return _missedAttacks;
@@ -47,7 +48,18 @@ function gameboardFactory() {
     });
   }
 
-  return { receiveAttack, setShip, getMissedAttacks };
+  function haveHallShipsShunk(shipsArray) {
+    for (let i = 0; i < shipsArray.length - 1; i += 1) {
+      if (!shipsArray[i].isSunk()) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  return {
+    receiveAttack, setShip, getMissedAttacks, haveHallShipsShunk,
+  };
 }
 
 export { gameboardFactory };
