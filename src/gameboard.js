@@ -1,5 +1,17 @@
+/* eslint-disable no-underscore-dangle */
 function gameboardFactory() {
-  const missedAttacks = [];
+  const _missedAttacks = [];
+
+  function getMissedAttacks() {
+    return _missedAttacks;
+  }
+
+  function attackCoordMatchShipCoord(array1, array2) {
+    return Array.isArray(array1)
+    && Array.isArray(array2)
+    && array1.length === array2.length
+    && array1.every((val, index) => val === array2[index]);
+  }
 
   function setShip(ship, coordinates) {
     ship.setCoordinates(coordinates);
@@ -9,11 +21,17 @@ function gameboardFactory() {
   // and then sends the ‘hit’ function to the correct ship,
   // or records the coordinates of the missed shot.
 
-  function attackHitShip(attackCoordinate, ship) {
+  function attackHitShip(attackCoord, ship) {
     // check if coord is in ship.getCoordinates [[0, 3], [1, 3], [2, 3]]
-    const shipCoordinatesJSON = JSON.stringify(ship.getCoordinates());
+    const shipCoordinates = ship.getCoordinates();
 
-    return shipCoordinatesJSON.includes(JSON.stringify(attackCoordinate));
+    for (let i = 0; i < shipCoordinates.length - 1; i += 1) {
+      const coord = shipCoordinates[i];
+      if (attackCoordMatchShipCoord(coord, attackCoord)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   function receiveAttack(coordinate, allShips) {
@@ -24,12 +42,12 @@ function gameboardFactory() {
       if (attackHitShip(coordinate, ship)) {
         ship.isHit();
       } else {
-        missedAttacks.push(coordinate);
+        _missedAttacks.push(coordinate);
       }
     });
   }
 
-  return { receiveAttack, setShip };
+  return { receiveAttack, setShip, getMissedAttacks };
 }
 
 export { gameboardFactory };
